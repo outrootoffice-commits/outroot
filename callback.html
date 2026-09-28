@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אישור התחברות - OUTROOT</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; line-height: 1.7; color: #222; text-align: center; }
+  h1 { color: #1a5d3a; }
+  .box { background: #f4f4f4; border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin: 20px 0; word-break: break-all; font-family: monospace; font-size: 15px; }
+  .label { color: #666; font-size: 13px; margin-bottom: 6px; }
+  button { background: #1a5d3a; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 15px; cursor: pointer; }
+  button:hover { background: #144a2e; }
+</style>
+</head>
+<body>
+<h1>ההתחברות הושלמה</h1>
+<p>העתק את הקוד הבא ושלח אותו בחזרה כדי להשלים את החיבור:</p>
+<div class="label">Authorization Code:</div>
+<div class="box" id="code">—</div>
+<button onclick="copyCode()">העתק קוד</button>
+<p id="msg" style="color:green;"></p>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code') || '(לא נמצא קוד בכתובת - נסה שוב מהאפליקציה)';
+  document.getElementById('code').textContent = code;
+  function copyCode() {
+    navigator.clipboard.writeText(code).then(() => {
+      document.getElementById('msg').textContent = 'הועתק!';
+    });
+  }
+</script>
+</body>
+</html>
